@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+# Compile and run one numbered course task.
+
+set -euo pipefail
+
+usage() {
+    cat <<'EOF'
+Usage: ./run <module> <e|x|m> <task-number>
+
+  <module>       Module number, for example: 1
+  e              An example from ModuleN/example/
+  x              An exercise directly in ModuleN/
+  m              A mini-exercise from ModuleN/mini-exercises/
+  <task-number>  A one- or two-digit task number, for example: 2, 10, or 03
+
+Examples:
+  ./run 1 e 2    Compile and run Module1/example/2.cpp
+  ./run 1 x 1    Compile and run the Module1 exercise for task 1
+  ./run 1 m 3    Compile and run Module1/mini-exercises/3.cpp
+  ./run 1 m 10   Compile and run Module1/mini-exercises/10.cpp
+EOF
+}
+
+if (($# == 1)) && [[ $1 == help || $1 == -h || $1 == --help ]]; then
+    usage
+    exit 0
+fi
+
+if (($# != 3)); then
+    usage >&2
+    exit 2
+fi
+
+module=$1
+kind=$2
+task_input=$3
+
+if [[ ! $module =~ ^[1-9][0-9]*$ ]]; then
+    echo "Module must be a positive number: $module" >&2
+    exit 2
+fi
+
+if [[ ! $task_input =~ ^[0-9]{1,2}$ ]] || ((10#$task_input == 0)); then
+    echo "Task number must be one or two digits and greater than zero: $task_input" >&2
+    exit 2
+fi
+task=$((10#$task_input))
+
+case "$kind" in
+    e)
+        mode=examples
+        source_dir="Module$module/example"
+        find_args=()
+        ;;
+    x)
+        mode=exercise
+        source_dir="Module$module"
+        find_args=(-maxdepth 1)
+        ;;
+    m)
+        mode=mini-exercises
+        source_dir="Module$module/mini-exercises"
+        find_args=()
+        ;;
+    *)
+        echo "Task kind must be 'e' (example), 'x' (exercise), or 'm' (mini-exercise): $kind" >&2
+        exit 2
+        ;;
+esac
+
+if [[ ! -d $source_dir ]]; then
+    echo "Source directory not found: $source_dir" >&2
+    exit 2
+fi
+
+# Prefer a plainly numbered file (for example, 2.cpp). Exercises may use a
+# descriptive filename ending in the task number (for example, PE_01.cpp).
+exact_match=
+numbered_matches=()
+while IFS= read -r -d '' source; do
+    filename=${source##*/}
+    stem=${filename%.*}
+    if [[ $stem == "$task" ]]; then
+        exact_match=$stem
+    elif [[ $stem =~ (^|[^[:digit:]])0*$task$ ]]; then
+        numbered_matches+=("$stem")
+    fi
+done < <(find "$source_dir" "${find_args[@]}" -type f \( -name '*.cpp' -o -name '*.cc' -o -name '*.cxx' \) -print0)
+
+if [[ -n $exact_match ]]; then
+    program=$exact_match
+elif ((${#numbered_matches[@]} == 1)); then
+    program=${numbered_matches[0]}
+elif ((${#numbered_matches[@]} > 1)); then
+    printf 'More than one task %s source was found in %s:\n' "$task" "$source_dir" >&2
+    printf '  %s\n' "${numbered_matches[@]}" >&2
+    exit 2
+else
+    echo "No source file for task $task was found in $source_dir." >&2
+    exit 2
+fi
+
+exec make "MODULE=$module" "MODE=$mode" "RUN=$program" build

@@ -1,4 +1,4 @@
-# Module 1 Practice Exercise Outputs
+# Module 1 Practical Exam Outputs
 
 This page shows the rendered output of the 20 Module 1 practice exercises. Continuous animations and keyboard-driven demonstrations use looping GIFs.
 

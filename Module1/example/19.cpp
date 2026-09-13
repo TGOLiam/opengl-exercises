@@ -16,9 +16,12 @@ using namespace std;
  * request a redraw.
  */
  
+
+#include <chrono>
 float squareX = -0.8f;
-float speed = 0.01f;
- 
+float velocity = 1 * 0.02;
+float accel = 20 * 0.02;
+
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(0.2f, 0.7f, 0.9f);
@@ -32,12 +35,43 @@ void display() {
  
     glFlush();
 }
- 
+
+bool has_started = false;
+std::chrono::steady_clock::time_point previous;
+std::chrono::steady_clock::time_point accel_timer;
+
+bool timer_passed = false;
 void idle() {
-    squareX += speed;
-    if (squareX > 0.8f || squareX < -0.8f) {
-        speed = -speed;  // bounce off the edges
+    if (!has_started){
+        previous = accel_timer = std::chrono::steady_clock::now();
+        has_started = true;
+        return;
     }
+    auto current = std::chrono::steady_clock::now();
+
+    std::chrono::duration<float> elapsed = current - previous;
+    float dt = elapsed.count();
+
+    if (!timer_passed && current >= accel_timer + std::chrono::seconds(1))
+    {
+        accel = -(accel); 
+        timer_passed = true;
+    }
+    velocity += accel * dt;
+    squareX += velocity * dt;
+
+
+    if (squareX > 0.7f) {
+        squareX = 0.7f;
+        
+    }
+    if (squareX < -0.7f) {
+        squareX = -0.7f;
+        
+    }
+
+    previous = current;
+
     glutPostRedisplay();
 }
  

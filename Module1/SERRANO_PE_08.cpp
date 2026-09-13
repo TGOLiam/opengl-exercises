@@ -10,13 +10,22 @@
 void display(){
     glClear(GL_COLOR_BUFFER_BIT);
 
+    glShadeModel(GL_SMOOTH);
+    glBegin(GL_POLYGON);
+
+
     glColor3f(1.0f, 0.0f, 0.0f);
+    glVertex2f(0.0f, 0.7f);
+    
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glVertex2f(0.7f, 0.0f);
+    
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glVertex2f(0.0f, -0.7f);
+    
 
-    glPointSize(15.0f);
-
-    glBegin(GL_POINTS);
-
-    glVertex2f(0.0f, 0.0f);
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glVertex2f(-0.7f, 0.0f);
 
     glEnd();
 
@@ -28,7 +37,7 @@ int main(int argc, char** argv){
 
     glutInitWindowSize(600, 600);
     
-    glutCreateWindow("PE_01");
+    glutCreateWindow("PE_08");
 
     glutDisplayFunc(display);
 

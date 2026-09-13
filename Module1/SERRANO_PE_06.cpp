@@ -12,11 +12,15 @@ void display(){
 
     glColor3f(1.0f, 0.0f, 0.0f);
 
-    glPointSize(15.0f);
+    glLineWidth(3.0f);
+    glBegin(GL_LINE_LOOP);
 
-    glBegin(GL_POINTS);
-
-    glVertex2f(0.0f, 0.0f);
+    glVertex2f(-0.8f, 0.0f);
+    glVertex2f(-0.4f, 0.7f);
+    glVertex2f(0.4f, 0.7f);
+    glVertex2f(0.8f, 0.0f);
+    glVertex2f(0.4f, -0.7f);
+    glVertex2f(-0.4f, -0.7f);
 
     glEnd();
 
@@ -28,7 +32,7 @@ int main(int argc, char** argv){
 
     glutInitWindowSize(600, 600);
     
-    glutCreateWindow("PE_01");
+    glutCreateWindow("PE_06");
 
     glutDisplayFunc(display);
 

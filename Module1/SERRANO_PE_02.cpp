@@ -10,13 +10,14 @@
 void display(){
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glColor3f(1.0f, 0.0f, 0.0f);
+    glColor3f(0.0f, 1.0f, 0.0f);
 
-    glPointSize(15.0f);
+    glLineWidth(4.0f);
 
-    glBegin(GL_POINTS);
+    glBegin(GL_LINES);
 
-    glVertex2f(0.0f, 0.0f);
+    glVertex2f(-0.9f, 0.0f);
+    glVertex2f(0.9f, 0.0f);
 
     glEnd();
 
@@ -28,7 +29,7 @@ int main(int argc, char** argv){
 
     glutInitWindowSize(600, 600);
     
-    glutCreateWindow("PE_01");
+    glutCreateWindow("PE_02");
 
     glutDisplayFunc(display);
 

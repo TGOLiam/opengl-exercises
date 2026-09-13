@@ -1,6 +1,6 @@
 # Module 1 Practice Exercise Outputs
 
-This page shows the rendered output of the 20 Module 1 practice exercises. The continuously animated exercises use looping GIFs; interactive exercises show their initial state.
+This page shows the rendered output of the 20 Module 1 practice exercises. Continuous animations and keyboard-driven demonstrations use looping GIFs; Q19 shows its initial state.
 
 ## Easy Exercises
 
@@ -124,7 +124,7 @@ Draw a landscape with a light-blue sky, green ground, and a sun.
 
 Draw a square that can be moved with the arrow keys while remaining inside the window.
 
-<p align="center"><img src="assets/outputs/PE_15.png" alt="Exercise Q15 initial output showing a movable red square" width="560"></p>
+<p align="center"><img src="assets/outputs/PE_15.gif" alt="Exercise Q15 animated output showing a red square moving in response to simulated arrow keys" width="560"></p>
 
 [Source code](SERRANO_PE_15.cpp)
 
@@ -140,7 +140,7 @@ Animate a ball moving diagonally and bouncing from all four window edges.
 
 Draw a traffic light whose active light advances when the user presses `n`.
 
-<p align="center"><img src="assets/outputs/PE_17.png" alt="Exercise Q17 initial traffic light simulator output" width="560"></p>
+<p align="center"><img src="assets/outputs/PE_17.gif" alt="Exercise Q17 animated output cycling the traffic light in response to simulated n key presses" width="560"></p>
 
 [Source code](SERRANO_PE_17.cpp)
 

@@ -1,6 +1,6 @@
 # Module 1 Practice Exercise Outputs
 
-This page shows the rendered output of the 20 Module 1 practice exercises. Continuous animations and keyboard-driven demonstrations use looping GIFs; Q19 shows its initial state.
+This page shows the rendered output of the 20 Module 1 practice exercises. Continuous animations and keyboard-driven demonstrations use looping GIFs.
 
 ## Easy Exercises
 
@@ -156,7 +156,7 @@ Draw a clock face with an animated rotating hand.
 
 Change the window background between six preset colors using number keys 1 through 6.
 
-<p align="center"><img src="assets/outputs/PE_19.png" alt="Exercise Q19 initial keyboard color picker output showing a red background" width="560"></p>
+<p align="center"><img src="assets/outputs/PE_19.gif" alt="Exercise Q19 animated output cycling through six background colors in response to simulated number keys" width="560"></p>
 
 [Source code](SERRANO_PE_19.cpp)
 

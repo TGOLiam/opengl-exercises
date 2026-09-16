@@ -1,0 +1,48 @@
+#define GL_SILENCE_DEPRECATION
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+#include <iostream>
+
+void display(){
+    glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glColor4f(1.0f, 0.0f, 0.0f, 0.5f);
+    glBegin(GL_QUADS);
+        glVertex2f(-0.7f, -0.5f);
+        glVertex2f(-0.7f, 0.5f);
+        glVertex2f(0.2f, 0.5f);
+        glVertex2f(0.2f, -0.5f);
+    glEnd();
+
+    glColor4f(0.0f, 0.4f, 1.0f, 0.5f);
+    glBegin(GL_QUADS);
+        glVertex2f(-0.2f, -0.5f);
+        glVertex2f(-0.2f, 0.5f);
+        glVertex2f(0.7f, 0.5f);
+        glVertex2f(0.7f, -0.5f);
+    glEnd();
+
+    glDisable(GL_BLEND);
+    glFlush();
+}
+
+int main(int argc, char** argv){
+    glutInit(&argc, argv);
+
+    glutInitWindowSize(600, 600);
+
+    glutCreateWindow("PE_19");
+
+    glutDisplayFunc(display);
+
+    glutMainLoop();
+
+    return 0;
+}

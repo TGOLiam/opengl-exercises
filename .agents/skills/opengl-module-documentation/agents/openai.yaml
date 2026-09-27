@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenGL Module Documentation"
+  short_description: "Capture GLUT outputs and document exercises"
+  default_prompt: "Use $opengl-module-documentation to capture a module’s GLUT exercises and update its Word manual and README."

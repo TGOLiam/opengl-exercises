@@ -36,6 +36,20 @@ The module focuses on:
 
 Open the [Module 2 exercise gallery](Module2/README.md) to view every practice exercise alongside its captured output.
 
+## Module 3 Text and Event-Driven Interaction
+
+Module 3 introduces bitmap and stroke text together with FreeGLUT's keyboard, mouse, entry, idle, and timer callbacks. Its 20 practice exercises progress from text rendering and window setup to interactive dragging, timed displays, and combined callback programs.
+
+The module focuses on:
+
+- rendering bitmap and stroke-font text;
+- configuring windows and converting pixel coordinates to OpenGL space;
+- handling keyboard, mouse, motion, and entry events;
+- animating with idle and timer callbacks; and
+- combining multiple callbacks into interactive programs.
+
+Open the [Module 3 exercise gallery](Module3/README.md) to view every practice exercise alongside its static or animated output.
+
 ## Working Through the Laboratory
 
 1. Run the guided example for the topic and observe its output.
@@ -51,6 +65,9 @@ The course materials are available here:
 - [Module 2 student laboratory manual](Module2/docs/Module_02_Student_Laboratory_Manual.docx)
 - [Module 2 manual with exercise outputs](Module2/docs/SERRANO_PE_M2.docx)
 - [Module 2 practice exercises and outputs](Module2/README.md)
+- [Module 3 student laboratory manual](Module3/docs/Module_03_Student_Laboratory_Manualv2.docx)
+- [Module 3 manual with exercise outputs](Module3/docs/SERRANO_PE_M3.docx)
+- [Module 3 practice exercises and outputs](Module3/README.md)
 
 ## Running a Course Activity
 
@@ -61,6 +78,7 @@ From the repository root, use `./run` with the module number, activity type, and
 ./run 1 m 3    # mini-exercise 3
 ./run 1 x 1    # practice exercise 1
 ./run 2 x 1    # Module 2 practice exercise 1
+./run 3 x 1    # Module 3 practice exercise 1
 ```
 
 The activity types are `e` for guided examples, `m` for mini-exercises, and `x` for practice exercises. The command compiles the selected program and opens its GLUT window.
@@ -74,9 +92,12 @@ make m1x    # practice exercises
 make m2     # all Module 2 activities
 make m2e    # Module 2 guided examples
 make m2x    # Module 2 practice exercises
+make m3     # all Module 3 activities
+make m3e    # Module 3 guided examples
+make m3x    # Module 3 practice exercises
 ```
 
-Use `make help` for the full command list. Compiled programs are placed in the corresponding `build/Module1/` or `build/Module2/` folder.
+Use `make help` for the full command list. Compiled programs are placed in the corresponding `build/ModuleN/` folder.
 
 ## Course Folder Guide
 
@@ -89,5 +110,9 @@ Use `make help` for the full command list. Compiled programs are placed in the c
 - `Module2/SERRANO_PE_01.cpp` through `SERRANO_PE_20.cpp` contain the Module 2 practice solutions.
 - `Module2/assets/outputs/` contains the Module 2 screenshots used by its gallery and completed manual.
 - `Module2/docs/` contains the Module 2 source manual and completed document copy.
+- `Module3/example/` contains the Module 3 guided programs.
+- `Module3/SERRANO_PE_01.cpp` through `SERRANO_PE_20.cpp` contain the Module 3 practice solutions.
+- `Module3/assets/outputs/` contains the Module 3 GIF demonstrations used by its gallery and completed manual.
+- `Module3/docs/` contains the Module 3 source manual and completed document copy.
 
 The local toolchain requires a C++ compiler, GNU Make, OpenGL, GLU, and FreeGLUT. The provided build setup uses `g++` with C++17.

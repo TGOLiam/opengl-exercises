@@ -3,7 +3,6 @@
 # Examples:
 #   make MODULE=1 MODE=examples
 #   make MODULE=1 MODE=exercise
-#   make MODULE=1 MODE=mini-exercises
 #   make MODULE=1 MODE=all
 #   make MODULE=1 MODE=examples RUN=1
 
@@ -19,21 +18,18 @@ BUILD_DIR ?= build
 
 MODULE_DIR := Module$(MODULE)
 EXAMPLE_DIR := $(MODULE_DIR)/example
-MINI_EXERCISE_DIR := $(MODULE_DIR)/mini-exercises
 MODULE_NUMBERS := $(patsubst Module%,%,$(notdir $(wildcard Module*)))
 
 # Exercise sources live directly in a module directory.  Example sources may
 # be organised in subdirectories beneath example/ as the course grows.
 EXERCISE_SOURCES := $(sort $(wildcard $(MODULE_DIR)/*.cpp $(MODULE_DIR)/*.cc $(MODULE_DIR)/*.cxx))
 EXAMPLE_SOURCES  := $(sort $(shell find "$(EXAMPLE_DIR)" -type f \( -name '*.cpp' -o -name '*.cc' -o -name '*.cxx' \) 2>/dev/null))
-MINI_EXERCISE_SOURCES := $(sort $(shell find "$(MINI_EXERCISE_DIR)" -type f \( -name '*.cpp' -o -name '*.cc' -o -name '*.cxx' \) 2>/dev/null))
 
 EXERCISE_BINS := $(patsubst $(MODULE_DIR)/%, $(BUILD_DIR)/$(MODULE_DIR)/exercise/%, $(basename $(EXERCISE_SOURCES)))
 EXAMPLE_BINS  := $(patsubst $(EXAMPLE_DIR)/%, $(BUILD_DIR)/$(MODULE_DIR)/examples/%, $(basename $(EXAMPLE_SOURCES)))
-MINI_EXERCISE_BINS := $(patsubst $(MINI_EXERCISE_DIR)/%, $(BUILD_DIR)/$(MODULE_DIR)/mini-exercises/%, $(basename $(MINI_EXERCISE_SOURCES)))
 
 .DEFAULT_GOAL := build
-.PHONY: build help list modules examples exercise mini-exercises all run clean check-module
+.PHONY: build help list modules examples exercise all run clean check-module
 
 # Shortcuts are generated for every ModuleN directory found at Makefile load.
 # m1  = everything in Module1; m1e = examples; m1x = exercises.
@@ -56,15 +52,14 @@ build: check-module
 		case "$(MODE)" in \
 			examples) program='$(BUILD_DIR)/$(MODULE_DIR)/examples/$(RUN)' ;; \
 			exercise) program='$(BUILD_DIR)/$(MODULE_DIR)/exercise/$(RUN)' ;; \
-			mini-exercises) program='$(BUILD_DIR)/$(MODULE_DIR)/mini-exercises/$(RUN)' ;; \
-			*) echo 'RUN needs MODE=examples, MODE=exercise, or MODE=mini-exercises.'; exit 2 ;; \
+			*) echo 'RUN needs MODE=examples or MODE=exercise.'; exit 2 ;; \
 		esac; \
 		$(MAKE) --no-print-directory MODULE=$(MODULE) MODE=$(MODE) RUN=$(RUN) "$$program"; \
 		$(MAKE) --no-print-directory MODULE=$(MODULE) MODE=$(MODE) RUN=$(RUN) run; \
 	else \
 		case "$(MODE)" in \
-			examples|exercise|mini-exercises|all) $(MAKE) --no-print-directory MODULE=$(MODULE) MODE=$(MODE) RUN= $(MODE) ;; \
-			*) echo "Unknown MODE: $(MODE). Use MODE=examples, MODE=exercise, MODE=mini-exercises, or MODE=all."; exit 2 ;; \
+			examples|exercise|all) $(MAKE) --no-print-directory MODULE=$(MODULE) MODE=$(MODE) RUN= $(MODE) ;; \
+			*) echo "Unknown MODE: $(MODE). Use MODE=examples, MODE=exercise, or MODE=all."; exit 2 ;; \
 		esac; \
 	fi
 
@@ -77,8 +72,7 @@ help:
 	@printf '%s\n' '  make m1x                        Build Module1 exercises only'
 	@printf '%s\n' '  make MODULE=1 MODE=examples     Build all examples in Module1'
 	@printf '%s\n' '  make MODULE=1 MODE=exercise     Build module exercise source files'
-	@printf '%s\n' '  make MODULE=1 MODE=mini-exercises Build mini-exercises in Module1'
-	@printf '%s\n' '  make MODULE=1 MODE=all          Build all task types (the default MODE)'
+	@printf '%s\n' '  make MODULE=1 MODE=all          Build examples and exercises (the default MODE)'
 	@printf '%s\n' '  make m1e RUN=1                  Build and run example 1'
 	@printf '%s\n' '  make m1e RUN=2                  Build and run example 2'
 	@printf '%s\n' '  make list                       Show discoverable modules and outputs'
@@ -98,7 +92,6 @@ list:
 	@printf '%s\n' 'Module $(MODULE) sources:'
 	@for source in $(EXERCISE_SOURCES); do printf '  exercise: %s\n' "$$source"; done
 	@for source in $(EXAMPLE_SOURCES); do printf '  example:  %s\n' "$$source"; done
-	@for source in $(MINI_EXERCISE_SOURCES); do printf '  mini-exercise: %s\n' "$$source"; done
 
 examples: check-module $(EXAMPLE_BINS)
 	@test -n "$(EXAMPLE_SOURCES)" || { echo "No example source files found in $(EXAMPLE_DIR)."; exit 2; }
@@ -106,10 +99,7 @@ examples: check-module $(EXAMPLE_BINS)
 exercise: check-module $(EXERCISE_BINS)
 	@test -n "$(EXERCISE_SOURCES)" || { echo "No exercise source files found directly in $(MODULE_DIR)."; exit 2; }
 
-mini-exercises: check-module $(MINI_EXERCISE_BINS)
-	@test -n "$(MINI_EXERCISE_SOURCES)" || { echo "No mini-exercise source files found in $(MINI_EXERCISE_DIR)."; exit 2; }
-
-all: examples exercise mini-exercises
+all: examples exercise
 
 # A source file is compiled into an executable at the corresponding build path.
 $(BUILD_DIR)/$(MODULE_DIR)/exercise/%: $(MODULE_DIR)/%.cpp
@@ -136,24 +126,11 @@ $(BUILD_DIR)/$(MODULE_DIR)/examples/%: $(EXAMPLE_DIR)/%.cxx
 	@mkdir -p "$(@D)"
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) "$<" -o "$@" $(LDLIBS)
 
-$(BUILD_DIR)/$(MODULE_DIR)/mini-exercises/%: $(MINI_EXERCISE_DIR)/%.cpp
-	@mkdir -p "$(@D)"
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) "$<" -o "$@" $(LDLIBS)
-
-$(BUILD_DIR)/$(MODULE_DIR)/mini-exercises/%: $(MINI_EXERCISE_DIR)/%.cc
-	@mkdir -p "$(@D)"
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) "$<" -o "$@" $(LDLIBS)
-
-$(BUILD_DIR)/$(MODULE_DIR)/mini-exercises/%: $(MINI_EXERCISE_DIR)/%.cxx
-	@mkdir -p "$(@D)"
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) "$<" -o "$@" $(LDLIBS)
-
 run: check-module
 	@case "$(MODE)" in \
 		examples) bins='$(EXAMPLE_BINS)'; program='$(BUILD_DIR)/$(MODULE_DIR)/examples/$(RUN)' ;; \
 		exercise) bins='$(EXERCISE_BINS)'; program='$(BUILD_DIR)/$(MODULE_DIR)/exercise/$(RUN)' ;; \
-		mini-exercises) bins='$(MINI_EXERCISE_BINS)'; program='$(BUILD_DIR)/$(MODULE_DIR)/mini-exercises/$(RUN)' ;; \
-		*) echo 'For run, use MODE=examples, MODE=exercise, or MODE=mini-exercises.'; exit 2 ;; \
+		*) echo 'For run, use MODE=examples or MODE=exercise.'; exit 2 ;; \
 	esac; \
 	test -n "$(RUN)" || { echo 'Set RUN to a program name or number, e.g. RUN=1.'; exit 2; }; \
 	test -n "$$bins" || { echo "No $$MODE program found for $(MODULE_DIR)."; exit 2; }; \

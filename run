@@ -5,19 +5,17 @@ set -euo pipefail
 
 usage() {
     cat <<'EOF'
-Usage: ./run <module> <e|x|m> <task-number>
+Usage: ./run <module><e|x><task-number>
 
   <module>       Module number, for example: 1
   e              An example from ModuleN/example/
   x              An exercise directly in ModuleN/
-  m              A mini-exercise from ModuleN/mini-exercises/
   <task-number>  A one- or two-digit task number, for example: 2, 10, or 03
 
 Examples:
-  ./run 1 e 2    Compile and run Module1/example/2.cpp
-  ./run 1 x 1    Compile and run the Module1 exercise for task 1
-  ./run 1 m 3    Compile and run Module1/mini-exercises/3.cpp
-  ./run 1 m 10   Compile and run Module1/mini-exercises/10.cpp
+  ./run 1e2      Compile and run Module1/example/2.cpp
+  ./run 1x1      Compile and run the Module1 exercise for task 1
+  ./run 4x10     Compile and run the Module4 exercise for task 10
 EOF
 }
 
@@ -26,14 +24,20 @@ if (($# == 1)) && [[ $1 == help || $1 == -h || $1 == --help ]]; then
     exit 0
 fi
 
-if (($# != 3)); then
+if (($# != 1)); then
     usage >&2
     exit 2
 fi
 
-module=$1
-kind=$2
-task_input=$3
+run_spec=$1
+if [[ ! $run_spec =~ ^([1-9][0-9]*)([ex])([0-9]{1,2})$ ]]; then
+    echo "Use <module><e|x><task-number>, for example: ./run 1e2" >&2
+    exit 2
+fi
+
+module=${BASH_REMATCH[1]}
+kind=${BASH_REMATCH[2]}
+task_input=${BASH_REMATCH[3]}
 
 if [[ ! $module =~ ^[1-9][0-9]*$ ]]; then
     echo "Module must be a positive number: $module" >&2
@@ -57,13 +61,8 @@ case "$kind" in
         source_dir="Module$module"
         find_args=(-maxdepth 1)
         ;;
-    m)
-        mode=mini-exercises
-        source_dir="Module$module/mini-exercises"
-        find_args=()
-        ;;
     *)
-        echo "Task kind must be 'e' (example), 'x' (exercise), or 'm' (mini-exercise): $kind" >&2
+        echo "Task kind must be 'e' (example) or 'x' (exercise): $kind" >&2
         exit 2
         ;;
 esac

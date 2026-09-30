@@ -16,12 +16,12 @@ Laboratory work for CS0045 using classic OpenGL and FreeGLUT. Each module contai
 From the repository root:
 
 ```sh
-./run 1 e 2    # guided example 2
-./run 1 m 3    # mini-exercise 3
-./run 4 x 1    # Module 4 practice exercise 1
+./run 1e2      # Module 1, guided example 2
+./run 1x1      # Module 1, practice exercise 1
+./run 4x10     # Module 4, practice exercise 10
 ```
 
-Use `e` for guided examples, `m` for mini-exercises, and `x` for practice exercises.
+Use `e` for guided examples and `x` for practice exercises.
 
 ## Build a Module
 
@@ -39,9 +39,9 @@ Run `make help` for every available target. Builds are written to `build/ModuleN
 ```text
 ModuleN/
 ├── example/          Guided programs
-├── mini-exercises/   Short concept checks (where provided)
 ├── SERRANO_PE_*.cpp  Practice exercise solutions
-├── assets/outputs/   Screenshots and GIF demonstrations
+├── assets/           Tracked PE_* screenshots and GIF demonstrations
+│   └── raw/          Local raw captures and recordings (ignored)
 └── docs/             Completed manuals
 ```
 

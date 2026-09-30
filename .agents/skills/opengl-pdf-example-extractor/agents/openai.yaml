@@ -1,4 +1,0 @@
-interface:
-  display_name: "OpenGL PDF Example Extractor"
-  short_description: "Stage guided OpenGL examples from module PDFs"
-  default_prompt: "Use $opengl-pdf-example-extractor at the start of a module task to gather, verify, and compile the Part A guided examples from the supplied PDF."

@@ -41,7 +41,6 @@ ModuleN/
 ├── example/          Guided programs
 ├── SERRANO_PE_*.cpp  Practice exercise solutions
 ├── assets/           Tracked PE_* screenshots and GIF demonstrations
-│   └── raw/          Local raw captures and recordings (ignored)
 └── docs/             Completed manuals
 ```
 

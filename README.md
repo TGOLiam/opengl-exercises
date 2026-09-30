@@ -6,10 +6,10 @@ Laboratory work for CS0045 using classic OpenGL and FreeGLUT. Each module contai
 
 | Module | Topic | Resources |
 | --- | --- | --- |
-| 1 | Introduction to Computer Graphics | [Gallery](Module1/README.md) · [Completed manual](Module1/docs/SERRANO_PE_M1.docx) |
-| 2 | OpenGL Primitives and Color | [Gallery](Module2/README.md) · [Student manual](Module2/docs/Module_02_Student_Laboratory_Manual.docx) · [Completed manual](Module2/docs/SERRANO_PE_M2.docx) |
-| 3 | Text and Event-Driven Interaction | [Gallery](Module3/README.md) · [Student manual](Module3/docs/Module_03_Student_Laboratory_Manualv2.docx) · [Completed manual](Module3/docs/SERRANO_PE_M3.docx) |
-| 4 | Vertex Arrays and Indexed Rendering | [Gallery](Module4/README.md) · [Student manual](Module4/docs/Module_04_Student_Laboratory_Manual%20%281%29.docx) · [Completed manual](Module4/docs/SERRANO_PE_M4.docx) |
+| 1 | Introduction to Computer Graphics | [Gallery](Module1/README.md) · [Completed manual](Module1/docs/SERRANO_PE_M1.pdf) |
+| 2 | OpenGL Primitives and Color | [Gallery](Module2/README.md) · [Completed manual](Module2/docs/SERRANO_PE_M2.pdf) |
+| 3 | Text and Event-Driven Interaction | [Gallery](Module3/README.md) · [Completed manual](Module3/docs/SERRANO_PE_M3.pdf) |
+| 4 | Vertex Arrays and Indexed Rendering | [Gallery](Module4/README.md) · [Completed manual](Module4/docs/SERRANO_PE_M4.pdf) |
 
 ## Run an Activity
 
@@ -42,7 +42,7 @@ ModuleN/
 ├── mini-exercises/   Short concept checks (where provided)
 ├── SERRANO_PE_*.cpp  Practice exercise solutions
 ├── assets/outputs/   Screenshots and GIF demonstrations
-└── docs/             Student and completed manuals
+└── docs/             Completed manuals
 ```
 
 Requirements: a C++17 compiler, GNU Make, OpenGL, GLU, and FreeGLUT.

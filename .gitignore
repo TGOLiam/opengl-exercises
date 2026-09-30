@@ -3,15 +3,7 @@ build/
 .~lock.*#
 
 # Keep the repository-local OpenGL documentation skill with this project.
-!.agents/
-.agents/*
-!.agents/skills/
-.agents/skills/*
-!.agents/skills/opengl-module-documentation/
-!.agents/skills/opengl-module-documentation/**
-!.agents/skills/opengl-pdf-example-extractor/
-!.agents/skills/opengl-pdf-example-extractor/**
-
-# Local documentation automation and generated working artifacts.
-.agents/skills/*/scripts/
-/automation/
+.agents/
+.codex/
+automation/
+*.docx

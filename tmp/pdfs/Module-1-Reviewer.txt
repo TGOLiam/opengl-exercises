@@ -1,0 +1,217 @@
+Module 1 Reviewer: OpenGL Foundations and the
+Rendering Pipeline
+Part A — Conceptual MCQ
+Choose the best answer.
+1. OpenGL is best described as a:
+A. window manager B. graphics rendering API C. programming language D. compiler
+2. Which organization currently manages the OpenGL standard?
+A. SGI B. Microsoft C. Khronos Group D. FreeGLUT
+3. OpenGL being window-system independent means that it:
+A. creates identical windows itself B. can work with different windowing toolkits C. needs no graphics driver D.
+runs without an OS
+4. Which item is normally supplied by GLUT rather than core OpenGL?
+A. Vertex processing B. Rasterization C. Window creation and input callbacks D. Fragment coloring
+5. Which sequence correctly follows the simplified rendering pipeline?
+A. Rasterization vertex specification fragment shader assembly
+B. Vertex specification vertex shader primitive assembly rasterization fragment shader per-sample
+operations
+C. Vertex shader framebuffer rasterization fragment shader
+D. Primitive assembly vertex specification per-sample operations rasterization
+6. Positions, colors, normals, and texture coordinates initially enter the pipeline during:
+A. vertex specification B. blending C. rasterization D. stencil testing
+7. Which stage normally applies model-view-projection transformations?
+A. Fragment shader B. Vertex shader C. Per-sample operations D. Framebuffer
+8. Which statement about a vertex shader is correct?
+A. It executes once per fragment B. It groups vertices into triangles C. It processes individual vertices D. It
+performs final blending
+9. Three processed vertices become a triangle during:
+A. primitive assembly B. clipping C. depth testing D. fragment shading
+10. Which programmable stage can add or modify whole primitives?
+A. Rasterizer B. Geometry shader C. Depth test D. Scissor test
+11. Rasterization primarily converts:
+A. fragments into vertices B. source code into shaders C. primitives into fragments D. colors into coordinates
+12. A fragment is best described as:
+A. a guaranteed final pixel B. a potential framebuffer contribution C. a vertex stored in a VBO D. a complete
+polygon
+13. Which stage typically computes a fragment's color?
+A. Vertex specification B. Primitive assembly C. Fragment shader D. Depth buffer
+14. Which operation decides whether a fragment is hidden behind a nearer surface?
+A. Depth testing B. Primitive assembly C. Vertex specification D. Geometry generation
+
+Page 1
+
+15. Transparency is commonly produced during per-sample operations through:
+A. clipping B. blending C. vertex assembly D. projection
+16. Which operation limits drawing to a rectangular part of the window?
+A. Scissoring B. Shading C. Assembly D. Projection
+17. Why is clipping useful?
+A. It compiles shaders B. It removes geometry outside the visible region C. It creates windows D. It stores vertices
+18. Which pair contains only programmable stages?
+A. Vertex shader and fragment shader B. Rasterization and depth testing C. Assembly and blending D. Clipping
+and scissoring
+19. What is the final destination of accepted color values?
+A. Vertex array B. Event queue C. Framebuffer D. Compiler
+20. Which statement correctly distinguishes a fragment from a final pixel?
+A. Every fragment is displayed B. A fragment may fail depth, stencil, or scissor tests C. Pixels exist before
+rasterization D. Fragments contain no color data
+
+Part B — Code Tracing
+21. What shape and approximate location does this draw?
+glBegin(GL_POLYGON);
+glVertex2f(-0.4f, -0.2f);
+glVertex2f(-0.4f, 0.2f);
+glVertex2f( 0.4f, 0.2f);
+glVertex2f( 0.4f, -0.2f);
+glEnd();
+
+A. A tall rectangle on the left B. A centered wide rectangle C. A centered square D. A diagonal line
+22. In what order do the messages appear?
+void display() { cout << "D"; glClear(GL_COLOR_BUFFER_BIT); glFlush(); }
+int main(int argc, char** argv) {
+cout << "A";
+glutInit(&argc, argv);
+glutCreateWindow("Test");
+glutDisplayFunc(display);
+cout << "B";
+glutMainLoop();
+cout << "C";
+}
+
+A. A, B, D B. A, B, C, D C. D, A, B, C D. A, D, B, C
+23. What is visually wrong with this display function?
+void display() {
+glBegin(GL_TRIANGLES);
+glVertex2f(-0.5f, -0.5f);
+glVertex2f( 0.5f, -0.5f);
+glVertex2f( 0.0f, 0.5f);
+glEnd();
+glClear(GL_COLOR_BUFFER_BIT);
+glFlush();
+}
+
+A. The vertices are outside the window B. The triangle is cleared after being drawn C. glFlush must precede
+glEnd D. Three vertices cannot form a polygon
+24. Which corner of the normalized window contains (0.75f, -0.75f)?
+A. Top-left B. Top-right C. Bottom-left D. Bottom-right
+25. The following call is executed once during initialization. When is display subsequently invoked?
+glutDisplayFunc(display);
+
+Page 2
+
+A. Immediately and only once inside glutDisplayFunc B. Whenever GLUT decides the window needs drawing C.
+Only when glFlush is called D. Before glutInit
+
+Part C — Fill in the Blanks
+26. Complete the calls that clear the color buffer and force queued commands to execute.
+glClear(________________________);
+// drawing code
+__________();
+
+27. Register renderScene as the display callback.
+____________________(renderScene);
+
+28. Complete the primitive needed to draw one filled triangle.
+glBegin(______________);
+glVertex2f(-0.5f, -0.5f);
+glVertex2f( 0.5f, -0.5f);
+glVertex2f( 0.0f, 0.5f);
+glEnd();
+
+29. Complete the initialization order.
+__________(&argc, argv);
+glutInitWindowSize(800, 600);
+________________("Reviewer");
+glutDisplayFunc(display);
+______________();
+
+30. Supply the missing coordinates for a centered square extending from -0.5 to 0.5 on both axes.
+glBegin(GL_POLYGON);
+glVertex2f(-0.5f, -0.5f);
+glVertex2f(-0.5f, ______);
+glVertex2f(______, 0.5f);
+glVertex2f( 0.5f, ______);
+glEnd();
+
+Part D — Final Fill-in-the-Blank Review
+31. OpenGL is a graphics-rendering ________, while GLUT supplies window and ________ handling.
+32. Complete the pipeline: vertex specification vertex ________ primitive assembly ________ fragment shader
+per-sample operations.
+33. The stage that turns primitives into potential pixels called fragments is ____________.
+34. The ________ shader commonly applies model-view-projection transformations, while the ________ shader
+computes per-fragment color.
+35. Visibility between overlapping fragments is normally resolved by the ________ test; transparency commonly
+uses __________.
+36. Complete the callback registration and loop:
+glutDisplayFunc(________);
+________________();
+
+37. Complete a centered point:
+glBegin(_________);
+glVertex2f(____, ____);
+glEnd();
+
+38. Complete the frame structure:
+glClear(____________________);
+// draw
+_________();
+
+39. Complete the window setup:
+glutInitWindowSize(____, ____);
+glutInitWindowPosition(____, ____);
+glutCreateWindow("Review");
+
+Page 3
+
+40. A vertex is assembled into a geometric __________; rasterization generates __________ from it.
+
+Answer Key and Explanations
+1. B — OpenGL exposes graphics-rendering operations.
+2. C — Khronos maintains the OpenGL specification.
+3. B — OpenGL can be paired with platform-specific or cross-platform window toolkits.
+4. C — GLUT supplies window and event-loop services.
+5. B — This is the course's simplified forward pipeline order.
+6. A — Vertex attributes are supplied at vertex specification.
+7. B — Vertex shaders commonly transform vertex positions.
+8. C — A vertex shader operates per submitted vertex.
+9. A — Assembly interprets vertices according to the selected primitive mode.
+10. B — The optional geometry shader works on whole primitives.
+11. C — Rasterization finds the fragments covered by primitives.
+12. B — A fragment is only a candidate; later tests may reject it.
+13. C — The fragment shader computes per-fragment outputs.
+14. A — Depth values resolve front-to-back visibility.
+15. B — Blending combines incoming and stored colors.
+16. A — The scissor test restricts rendering to a rectangle.
+17. B — Clipping avoids processing invisible portions outside the viewing region.
+18. A — Both are developer-programmable shader stages.
+19. C — Accepted samples update framebuffer attachments.
+20. B — Later tests mean a generated fragment may never affect the displayed image.
+21. B — A centered, wide rectangle spanning x=-0.4..0.4 and y=-0.2..0.2.
+22. A — A, B, then D (possibly D again later). C normally never prints because the main loop does not return.
+23. B — The triangle is cleared immediately after being drawn.
+24. D — Positive x is right; negative y is down.
+25. B — The call registers display; GLUT invokes it when drawing is required.
+26. GL_COLOR_BUFFER_BIT; glFlush
+27. glutDisplayFunc
+28. GL_TRIANGLES
+29. glutInit; glutCreateWindow; glutMainLoop
+30. 0.5f; 0.5f; -0.5f
+31. API; event/input
+32. shader; rasterization
+33. rasterization
+34. vertex; fragment
+35. depth; blending
+36. display; glutMainLoop
+37. GL_POINTS; 0.0f; 0.0f
+38. GL_COLOR_BUFFER_BIT; glFlush
+39. Example: 800; 600; 100; 100
+40. primitive; fragments
+
+Page 4
+
+Pipeline Memory Check
+Vertices enter shaders transform primitives assemble rasterization generates fragments fragment shading
+colors them tests and blending decide framebuffer output.
+
+Page 5
+
+

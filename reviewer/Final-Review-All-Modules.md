@@ -1,0 +1,271 @@
+# Final Review — Modules 1–4
+
+This final review emphasizes syntax recall through fill-in-the-blank questions while retaining conceptual and code-tracing MCQs. Complete it without consulting the cheatsheet, then check the answer key.
+
+## Module 1 — Foundations and Rendering Pipeline
+
+### Concept and Trace MCQ
+
+1. Which stage converts primitives into fragments?  
+   A. Vertex specification  B. Primitive assembly  C. Rasterization  D. Blending
+
+2. Where is final per-fragment color normally computed?  
+   A. Vertex shader  B. Fragment shader  C. Depth test  D. GLUT callback
+
+3. What is wrong with this order?
+```cpp
+glBegin(GL_TRIANGLES);
+// vertices
+glEnd();
+glClear(GL_COLOR_BUFFER_BIT);
+glFlush();
+```
+   A. Nothing  B. The frame is cleared after drawing  C. `glFlush` needs arguments  D. Triangles need four vertices
+
+### Fill in the Blanks
+
+4. Complete the pipeline: vertex specification → vertex ________ → primitive ________ → rasterization → fragment ________ → per-sample operations.
+
+5. Complete initialization:
+```cpp
+__________(&argc,argv);
+glutInitWindowSize(800,600);
+________________("Review");
+________________(display);
+glutMainLoop();
+```
+
+6. Complete a frame:
+```cpp
+glClear(____________________);
+glBegin(____________);
+// three vertices
+glEnd();
+_________();
+```
+
+7. Complete a centered vertex: `glVertex2f(____, ____);`
+
+8. The ________ test resolves hidden surfaces, while __________ combines colors for transparency.
+
+9. `glutDisplayFunc(display)` ________ the callback; it does not directly ________ it.
+
+10. Complete the coordinate directions: positive x moves ________; positive y moves ________.
+
+---
+
+## Module 2 — Primitives and Colors
+
+### Concept and Trace MCQ
+
+11. Seven vertices in `GL_LINES` produce:  
+    A. 3 lines, 1 ignored vertex  B. 6 lines  C. 7 lines  D. 3 lines, no ignored vertices
+
+12. Five vertices in `GL_TRIANGLE_FAN` produce:  
+    A. 1 triangle  B. 2 triangles  C. 3 triangles  D. 5 triangles
+
+13. What appears?
+```cpp
+glBegin(GL_LINES);
+glColor3f(1,0,0); glVertex2f(-1,0);
+glColor3f(0,0,1); glVertex2f( 1,0);
+glEnd();
+```
+   A. Red line  B. Blue line  C. Red-to-blue line  D. Two points
+
+### Fill in the Blanks
+
+14. Complete line modes: independent `GL______`; connected open `GL_LINE______`; connected closed `GL_LINE______`.
+
+15. Complete filled modes: independent triangles `GL_________`; shared-first-vertex triangles `GL_TRIANGLE______`; connected quads `GL_QUAD______`.
+
+16. Complete colors:
+```cpp
+glColor3f(____,____,____);       // yellow
+glColor3ub(____,____,____);      // pure blue
+glColor4f(1,0,0,____);           // half-transparent red
+```
+
+17. Complete stippling:
+```cpp
+glEnable(________________);
+________________(2,0xAAAA);
+// draw lines
+glDisable(________________);
+```
+
+18. Complete blending:
+```cpp
+glEnable(________);
+glBlendFunc(____________,____________________);
+```
+
+19. Complete a procedural circle point:
+```cpp
+float a=2.0f*PI*i/segments;
+glVertex2f(radius*____(a),radius*____(a));
+```
+
+20. `glColor3f` uses values from ________ to ________; `glColor3ub` uses ________ to ________.
+
+---
+
+## Module 3 — Text and Callbacks
+
+### Concept and Trace MCQ
+
+21. Which callback handles movement without a pressed mouse button?  
+    A. `glutMotionFunc`  B. `glutPassiveMotionFunc`  C. `glutMouseFunc`  D. `glutEntryFunc`
+
+22. A timer callback does not schedule another timer. How often does it execute?  
+    A. Never  B. Once  C. Twice  D. Continuously
+
+23. What is missing after `x += .1f;` in a keyboard callback if the object does not visibly move?  
+    A. `glutPostRedisplay()`  B. `glutMainLoop()`  C. `glBegin()`  D. `glutInit()`
+
+### Fill in the Blanks
+
+24. Complete keyboard input:
+```cpp
+void keyboard(____________ key,int x,int y);
+________________(keyboard);
+```
+
+25. Complete mouse input:
+```cpp
+void mouse(____ button,____ state,____ x,____ y);
+________________(mouse);
+```
+
+26. Detect a left press: `button==__________________ && state==_________`.
+
+27. Register active movement, passive movement, and entry detection:
+```cpp
+________________(drag);
+_______________________(hover);
+______________(entry);
+```
+
+28. Complete bitmap text:
+```cpp
+______________(-.5f,0);
+glutBitmapCharacter(________________________,'A');
+```
+
+29. Complete stroke text:
+```cpp
+glPushMatrix();
+__________(.002f,.002f,1);
+glutStrokeCharacter(_________________,'A');
+_____________();
+```
+
+30. Complete a repeating timer:
+```cpp
+void timer(int value){
+  __________________();
+  ______________(1000,timer,value);
+}
+```
+
+---
+
+## Module 4 — Vertex Arrays and Indexed Rendering
+
+### Concept and Trace MCQ
+
+31. `glDrawArrays(GL_TRIANGLES,0,6)` processes:  
+    A. 2 vertices  B. 3 vertices  C. 6 vertices  D. 6 indices
+
+32. Given `GLubyte i[]={2,0,1}`, which order does `glDrawElements(...,3,GL_UNSIGNED_BYTE,i)` use?  
+    A. 0,1,2  B. 2,0,1  C. 1,2,0  D. Storage order only
+
+33. For `x,y,z,r,g,b`, the stride is:  
+    A. 3 bytes  B. 6 bytes  C. `3*sizeof(GLfloat)`  D. `6*sizeof(GLfloat)`
+
+### Fill in the Blanks
+
+34. Complete the basic array sequence:
+```cpp
+glEnableClientState(_______________);
+glVertexPointer(3,________,0,vertices);
+glDrawArrays(____________,0,3);
+glDisableClientState(_______________);
+```
+
+35. Complete color arrays:
+```cpp
+glEnableClientState(______________);
+____________(3,GL_FLOAT,0,colors);
+```
+
+36. Complete indexed drawing:
+```cpp
+GLubyte indices[]={0,1,2,0,2,3};
+glDrawElements(____________,____,__________________,indices);
+```
+
+37. Match types: `GLubyte` → `________________`; `GLushort` → `_________________`; `GLuint` → `_______________`.
+
+38. Complete interleaved `x,y,z,r,g,b` data:
+```cpp
+GLsizei stride=____*sizeof(GLfloat);
+glVertexPointer(____,GL_FLOAT,stride,data);
+glColorPointer(____,GL_FLOAT,stride,data+____);
+```
+
+39. Complete two triangles using four shared vertices:
+```cpp
+GLubyte indices[]={0,1,2,0,____,____};
+glDrawElements(GL_TRIANGLES,____,GL_UNSIGNED_BYTE,indices);
+```
+
+40. Complete the distinction: `glDrawArrays` processes vertices __________; `glDrawElements` uses an __________ array to choose and reuse them.
+
+---
+
+# Answer Key
+
+## Module 1
+
+1. **C**  2. **B**  3. **B**  
+4. `shader`; `assembly`; `shader`  
+5. `glutInit`; `glutCreateWindow`; `glutDisplayFunc`  
+6. `GL_COLOR_BUFFER_BIT`; `GL_TRIANGLES`; `glFlush`  
+7. `0.0f`; `0.0f`  
+8. `depth`; `blending`  
+9. `registers`; `execute/call`  
+10. `right`; `up`
+
+## Module 2
+
+11. **A**  12. **C**  13. **C**  
+14. `LINES`; `STRIP`; `LOOP`  
+15. `TRIANGLES`; `FAN`; `STRIP`  
+16. `1,1,0`; `0,0,255`; `0.5f`  
+17. `GL_LINE_STIPPLE`; `glLineStipple`; `GL_LINE_STIPPLE`  
+18. `GL_BLEND`; `GL_SRC_ALPHA`; `GL_ONE_MINUS_SRC_ALPHA`  
+19. `cos`; `sin`  
+20. `0.0`; `1.0`; `0`; `255`
+
+## Module 3
+
+21. **B**  22. **B**  23. **A**  
+24. `unsigned char`; `glutKeyboardFunc`  
+25. `int`; `int`; `int`; `int`; `glutMouseFunc`  
+26. `GLUT_LEFT_BUTTON`; `GLUT_DOWN`  
+27. `glutMotionFunc`; `glutPassiveMotionFunc`; `glutEntryFunc`  
+28. `glRasterPos2f`; `GLUT_BITMAP_HELVETICA_18`  
+29. `glScalef`; `GLUT_STROKE_ROMAN`; `glPopMatrix`  
+30. `glutPostRedisplay`; `glutTimerFunc`
+
+## Module 4
+
+31. **C**  32. **B**  33. **D**  
+34. `GL_VERTEX_ARRAY`; `GL_FLOAT`; `GL_TRIANGLES`; `GL_VERTEX_ARRAY`  
+35. `GL_COLOR_ARRAY`; `glColorPointer`  
+36. `GL_TRIANGLES`; `6`; `GL_UNSIGNED_BYTE`  
+37. `GL_UNSIGNED_BYTE`; `GL_UNSIGNED_SHORT`; `GL_UNSIGNED_INT`  
+38. `6`; `3`; `3`; `3`  
+39. `2`; `3`; `6`  
+40. `sequentially`; `index`

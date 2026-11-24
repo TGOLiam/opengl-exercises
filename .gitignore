@@ -10,3 +10,5 @@ automation/
 
 # Raw screenshots and screen recordings stay local; processed PE_* outputs are tracked.
 Module[2-4]/assets/raw/
+*.png
+*.webm

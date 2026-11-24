@@ -1,0 +1,84 @@
+Manual: /home/liamb/Documents/3rdYear/opengl/opengl-task/Module6/docs/Module_06_Student_Laboratory_Manual.pdf
+Examples staged: 20
+
+Example 01 — Immediate Mode Color Cube (Before Conversion)
+  candidate: 1.cpp
+  warning: none detected; manual comparison is still required
+
+Example 02 — Immediate Mode Pyramid (Before Conversion)
+  candidate: 2.cpp
+  warning: none detected; manual comparison is still required
+
+Example 03 — The Cube, as a VBO
+  candidate: 3.cpp
+  warning: none detected; manual comparison is still required
+
+Example 04 — The Pyramid, as a VBO
+  candidate: 4.cpp
+  warning: none detected; manual comparison is still required
+
+Example 05 — The translate() Matrix Function, Applied Once
+  candidate: 5.cpp
+  warning: none detected; manual comparison is still required
+
+Example 06 — Continuous Matrix Translation via glutTimerFunc
+  candidate: 6.cpp
+  warning: none detected; manual comparison is still required
+
+Example 07 — The scale() Matrix Function
+  candidate: 7.cpp
+  warning: none detected; manual comparison is still required
+
+Example 08 — The rotateZ() Matrix Function, Animated
+  candidate: 8.cpp
+  warning: none detected; manual comparison is still required
+
+Example 09 — Matrix-Vector Product, By Hand
+  candidate: 9.cpp
+  warning: none detected; manual comparison is still required
+
+Example 10 — Homogeneous Coordinates: w=1 vs. w=0
+  candidate: 10.cpp
+  warning: none detected; manual comparison is still required
+
+Example 11 — glBufferSubData(): Position + Color, One Buffer
+  candidate: 11.cpp
+  warning: line 21: unmatched quote; inspect adjacent PDF line
+  warning: line 22: unmatched quote; inspect adjacent PDF line
+
+Example 12 — glBufferSubData() With glDrawArrays
+  candidate: 12.cpp
+  warning: none detected; manual comparison is still required
+
+Example 13 — Color Cube Faces via Position + Color VBO
+  candidate: 13.cpp
+  warning: none detected; manual comparison is still required
+
+Example 14 — Combining Transformations: One Multiply, Two Effects
+  candidate: 14.cpp
+  warning: none detected; manual comparison is still required
+
+Example 15 — glArrayElement() in a Loop
+  candidate: 15.cpp
+  warning: line 20: unmatched quote; inspect adjacent PDF line
+  warning: line 21: unmatched quote; inspect adjacent PDF line
+
+Example 16 — Registering an Error-Handling Callback
+  candidate: 16.cpp
+  warning: none detected; manual comparison is still required
+
+Example 17 — Left-Hand vs. Right-Hand: Winding Order and Culling
+  candidate: 17.cpp
+  warning: none detected; manual comparison is still required
+
+Example 18 — Full Three-Face Color Cube
+  candidate: 18.cpp
+  warning: none detected; manual comparison is still required
+
+Example 19 — rotateY(): Continuous Rotation Around the Y Axis
+  candidate: 19.cpp
+  warning: none detected; manual comparison is still required
+
+Example 20 — Capstone: Animated Color Cube With Cleanup
+  candidate: 20.cpp
+  warning: none detected; manual comparison is still required

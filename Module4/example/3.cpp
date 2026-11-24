@@ -28,8 +28,6 @@
       glEnableClientState(GL_VERTEX_ARRAY);
 
 
-
-
        glVertexPointer(3, GL_FLOAT, 0, pointVertex);
        glDrawArrays(GL_POINTS, 0, 4);
        glDisableClientState(GL_VERTEX_ARRAY);

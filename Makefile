@@ -9,7 +9,7 @@
 CXX       ?= g++
 CPPFLAGS  +=
 CXXFLAGS  ?= -std=c++17 -Wall -Wextra -Wpedantic
-LDLIBS    ?= -lglut -lGL -lGLU
+LDLIBS    ?= -lGLEW -lglut -lGL -lGLU
 
 MODULE    ?= 1
 MODE      ?= all

@@ -1,0 +1,222 @@
+Module 3 Reviewer: Text and GLUT Callbacks
+Part A — Short MCQ
+1. Which font type can be scaled using geometric transformations? A. Bitmap B. Stroke C. Raster-only D. Pixel
+buffer
+2. Which callback observes mouse movement with no button pressed? A. glutMotionFunc B. glutMouseFunc C.
+glutPassiveMotionFunc D. glutEntryFunc
+3. Which function asks GLUT to call the display callback again? A. glFlush B. glutPostRedisplay C.
+glutMainLoop D. glClear
+
+Part B — Code Tracing
+4. Where and in what color is the text drawn?
+glColor3f(1,1,0);
+glRasterPos2f(-0.5f, 0.25f);
+glutBitmapString(GLUT_BITMAP_HELVETICA_18,
+(const unsigned char*)"CG");
+
+A. Yellow at (-0.5, 0.25) B. White at the origin C. Red at (0.5, -0.25) D. Yellow at pixel (0,0)
+5. Why may changing the color after glRasterPos2f produce unexpected bitmap-text behavior in the course
+examples?
+A. Raster attributes are captured when the raster position is established B. Bitmap text cannot be colored C.
+glColor3f moves the raster position D. Text only supports white
+6. Starting with px=0, what is px after keys d, d, a?
+void keyboard(unsigned char key,int,int) {
+if (key=='a') px -= .1f;
+if (key=='d') px += .1f;
+glutPostRedisplay();
+}
+
+A. -0.1 B. 0.0 C. 0.1 D. 0.3
+7. What is the final value after 20 presses of d?
+px += .1f;
+if (px > .8f) px = .8f;
+
+A. 0.8 B. 1.0 C. 2.0 D. -0.8
+8. What user actions print each message?
+if (button==GLUT_LEFT_BUTTON && state==GLUT_DOWN) cout << "A";
+if (button==GLUT_LEFT_BUTTON && state==GLUT_UP)
+cout << "B";
+
+A. A on press, B on release B. A on release, B on press C. Both on press D. Both on pointer movement
+9. Which callback runs while the left button is held and the pointer moves?
+A. glutPassiveMotionFunc B. glutMotionFunc C. glutEntryFunc D. glutDisplayFunc
+10. For an 800×600 window, convert pixel (400,300) using:
+float ox = 2.0f*x/800.0f - 1.0f;
+float oy = 1.0f - 2.0f*y/600.0f;
+
+A. (-1,-1) B. (0,0) C. (1,1) D. (400,300)
+11. Using the same conversion, approximately where does pixel (0,0) map?
+A. (-1,1) B. (-1,-1) C. (1,1) D. (0,0)
+12. What state values can an entry callback receive, and what do they mean?
+A. GLUT_UP/DOWN, button state B. GLUT_ENTERED/LEFT, pointer entry or exit C. GLUT_ACTIVE/IDLE, animation
+state D. GLUT_IN/OUT, window focus
+
+Page 1
+
+13. Starting at x=.79, dx=.02, trace two idle calls.
+x += dx;
+if (x > .8f || x < -.8f) dx = -dx;
+
+A. .81 then .83 B. .77 then .75 C. .81 with reversal, then .79 D. .80 then .80
+14. How many times does this timer run?
+void tick(int) { ++counter; glutPostRedisplay(); }
+// main:
+glutTimerFunc(1000, tick, 0);
+
+A. Never B. Once C. Twice D. Forever
+15. Why does this version repeat?
+void tick(int value) {
+++counter;
+glutPostRedisplay();
+glutTimerFunc(1000, tick, value);
+}
+
+A. glFlush repeats it B. The callback registers the next timer C. value is nonzero D. Timers repeat automatically
+16. Starting with seconds=2, trace three timer calls.
+if (seconds > 0) --seconds;
+if (seconds > 0) glutTimerFunc(1000, tick, 0);
+
+A. 2,2,2 B. 1,0, then no third call C. 1,0,-1 D. 3,4,5
+17. What bug is present?
+void keyboard(unsigned char key,int,int) {
+switch(key) {
+case 'r': red=1; green=0; blue=0;
+case 'g': red=0; green=1; blue=0;
+break;
+}
+}
+
+A. Missing break after r causes fall-through to green B. switch cannot use characters C. RGB values must be
+integers above 1 D. Case g runs first
+18. A mouse callback updates squareX, but the window does not change until exposed. What call is probably
+missing?
+A. glutInit B. glutPostRedisplay C. glBegin D. glutCreateWindow
+
+Part C — Fill in the Blanks
+19. Register a keyboard callback: ________________(keyboard);
+20. Complete its signature:
+void keyboard(____________ key, int x, int y)
+
+21. Register a mouse-button callback: ______________(mouse);
+22. Detect a left-button press.
+if (button == __________________ && state == __________) { /*...*/ }
+
+23. Register active and passive motion callbacks.
+________________(drag);
+_______________________(hover);
+
+24. Register entry/exit detection: ______________(entry);
+25. Complete bitmap positioning and output.
+glColor3f(1,1,1);
+______________(-.2f, .4f);
+glutBitmapString(________________________,
+(const unsigned char*)"Score");
+
+26. Complete a repeating one-second timer.
+Page 2
+
+void tick(int value) {
+++count;
+__________________();
+______________(1000, tick, value);
+}
+
+27. Register continuous background animation: ______________(animate);
+28. Complete vertical pixel-to-OpenGL conversion for a window of height h:
+float oy = 1.0f - __________________;
+
+29. Complete a drag condition.
+bool dragging=false;
+void mouse(int button,int state,int,int) {
+if (button==GLUT_LEFT_BUTTON)
+dragging = (state == __________);
+}
+void motion(int x,int y) {
+if (__________) { /* update square */ }
+}
+
+30. Fill the event-driven chain: event __________ update state glutPostRedisplay() __________.
+
+Part D — Final Fill-in-the-Blank Review
+31. Complete bitmap text:
+glColor3f(1,1,1);
+______________(-.5f,0);
+glutBitmapCharacter(________________________, 'A');
+
+32. Complete scalable text:
+glPushMatrix();
+__________(.002f,.002f,1);
+glutStrokeCharacter(_________________, 'A');
+_____________();
+
+33. Complete keyboard registration and signature:
+void keyboard(____________ key, int x, int y);
+________________(keyboard);
+
+34. Complete a left-button press test:
+button == __________________ && state == _________
+
+35. Register dragging and hovering:
+________________(drag);
+_______________________(hover);
+
+36. Complete entry detection: void entry(____ state); and ______________(entry);
+37. Complete a repeating timer:
+void timer(int value) {
+__________________();
+______________(1000,timer,value);
+}
+
+38. Query the current dimensions:
+int w = glutGet(_________________);
+int h = glutGet(__________________);
+
+39. Convert mouse pixels to normalized coordinates:
+float ox = 2.0f*x/w - ____;
+float oy = ____ - 2.0f*y/h;
+
+40. Complete the event chain: event __________ update state glutPostRedisplay() __________ callback.
+
+Answer Key and Explanations
+1. B 2. C 3. B
+Page 3
+
+4. A — Yellow text begins at object position (-0.5, 0.25).
+5. A — The course correctly recommends setting color before raster position.
+6. C — 0 + .1 + .1 - .1 = .1.
+7. A — The value is clamped to .8.
+8. A — GLUT_DOWN is press and GLUT_UP is release.
+9. B — Active motion means movement with a pressed button.
+10. B — The window center maps to (0,0).
+11. A — The top-left pixel maps to approximately (-1,1).
+12. B — They report pointer entry and exit.
+13. C — It overshoots to .81, reverses, then returns to .79.
+14. B — A timer must schedule its next call explicitly.
+15. B — The callback registers another timer before returning.
+16. B — Values become 1 then 0, after which no timer is scheduled.
+17. A — Missing break causes fall-through and the final color is green.
+18. B — glutPostRedisplay() requests the redraw.
+19. glutKeyboardFunc 20. unsigned char 21. glutMouseFunc
+22. GLUT_LEFT_BUTTON; GLUT_DOWN
+23. glutMotionFunc; glutPassiveMotionFunc
+24. glutEntryFunc
+25. glRasterPos2f; GLUT_BITMAP_HELVETICA_18
+26. glutPostRedisplay; glutTimerFunc
+27. glutIdleFunc
+28. 2.0f * y / h
+29. GLUT_DOWN; dragging
+30. callback; display callback
+31. glRasterPos2f; GLUT_BITMAP_HELVETICA_18
+32. glScalef; GLUT_STROKE_ROMAN; glPopMatrix
+33. unsigned char; glutKeyboardFunc
+34. GLUT_LEFT_BUTTON; GLUT_DOWN
+35. glutMotionFunc; glutPassiveMotionFunc
+36. int; glutEntryFunc
+37. glutPostRedisplay; glutTimerFunc
+38. GLUT_WINDOW_WIDTH; GLUT_WINDOW_HEIGHT
+39. 1.0f; 1.0f
+40. callback; display
+
+Page 4
+
+

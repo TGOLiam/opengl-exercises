@@ -1,0 +1,43 @@
+Manual: /home/liamb/Documents/3rdYear/opengl/opengl-task/Module8/docs/Module_08_Student_Laboratory_Manual.docx
+Examples staged: 20
+Source: DOCX complete-source blocks in Part A; Part B excluded.
+Example 01 — 1.cpp
+  warning: none detected; manual comparison is still required
+Example 02 — 2.cpp
+  warning: none detected; manual comparison is still required
+Example 03 — 3.cpp
+  warning: none detected; manual comparison is still required
+Example 04 — 4.cpp
+  warning: none detected; manual comparison is still required
+Example 05 — 5.cpp
+  warning: none detected; manual comparison is still required
+Example 06 — 6.cpp
+  warning: none detected; manual comparison is still required
+Example 07 — 7.cpp
+  warning: none detected; manual comparison is still required
+Example 08 — 8.cpp
+  warning: none detected; manual comparison is still required
+Example 09 — 9.cpp
+  warning: none detected; manual comparison is still required
+Example 10 — 10.cpp
+  warning: none detected; manual comparison is still required
+Example 11 — 11.cpp
+  warning: none detected; manual comparison is still required
+Example 12 — 12.cpp
+  warning: none detected; manual comparison is still required
+Example 13 — 13.cpp
+  warning: none detected; manual comparison is still required
+Example 14 — 14.cpp
+  warning: none detected; manual comparison is still required
+Example 15 — 15.cpp
+  warning: none detected; manual comparison is still required
+Example 16 — 16.cpp
+  warning: none detected; manual comparison is still required
+Example 17 — 17.cpp
+  warning: none detected; manual comparison is still required
+Example 18 — 18.cpp
+  warning: none detected; manual comparison is still required
+Example 19 — 19.cpp
+  warning: none detected; manual comparison is still required
+Example 20 — 20.cpp
+  warning: none detected; manual comparison is still required

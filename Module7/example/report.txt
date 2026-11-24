@@ -1,0 +1,82 @@
+Manual: /home/liamb/Documents/3rdYear/opengl/opengl-task/Module7/docs/Module_07_Student_Laboratory_Manual.pdf
+Examples staged: 20
+
+Example 01 — Baseline Triangle (No Transformations)
+  candidate: 1.cpp
+  warning: none detected; manual comparison is still required
+
+Example 02 — glTranslatef(): Moving an Object
+  candidate: 2.cpp
+  warning: none detected; manual comparison is still required
+
+Example 03 — glRotatef(): Rotating an Object
+  candidate: 3.cpp
+  warning: none detected; manual comparison is still required
+
+Example 04 — glScalef(): Resizing an Object
+  candidate: 4.cpp
+  warning: none detected; manual comparison is still required
+
+Example 05 — glPushMatrix() / glPopMatrix(): Isolating a Transform
+  candidate: 5.cpp
+  warning: none detected; manual comparison is still required
+
+Example 06 — Transformation Order Matters
+  candidate: 6.cpp
+  warning: none detected; manual comparison is still required
+
+Example 07 — glOrtho(): Orthographic Projection Setup
+  candidate: 7.cpp
+  warning: none detected; manual comparison is still required
+
+Example 08 — gluOrtho2D(): Simplified 2D Projection
+  candidate: 8.cpp
+  warning: none detected; manual comparison is still required
+
+Example 09 — Timer-Driven Rotation (animateTriangle Pattern)
+  candidate: 9.cpp
+  warning: none detected; manual comparison is still required
+
+Example 10 — The Full Lecture Sample: VBO + Push/Pop + Timer
+  candidate: 10.cpp
+  warning: none detected; manual comparison is still required
+
+Example 11 — gluPerspective(): Perspective Projection Setup
+  candidate: 11.cpp
+  warning: none detected; manual comparison is still required
+
+Example 12 — glFrustum(): Manual Perspective Control
+  candidate: 12.cpp
+  warning: none detected; manual comparison is still required
+
+Example 13 — gluLookAt(): Positioning the Camera
+  candidate: 13.cpp
+  warning: none detected; manual comparison is still required
+
+Example 14 — The Full Lecture Capstone: Animated Color Pyramid
+  candidate: 14.cpp
+  warning: none detected; manual comparison is still required
+
+Example 15 — GLUT_DEPTH and the Z-Buffer
+  candidate: 15.cpp
+  warning: none detected; manual comparison is still required
+
+Example 16 — Hierarchical Modeling: a Two-Segment Arm
+  candidate: 16.cpp
+  warning: none detected; manual comparison is still required
+
+Example 17 — Three Independent Objects, Three Push/Pop Pairs
+  candidate: 17.cpp
+  warning: none detected; manual comparison is still required
+
+Example 18 — glViewport(): Split-Screen Rendering
+  candidate: 18.cpp
+  warning: none detected; manual comparison is still required
+
+Example 19 — glViewport() Tied to Window Resizing
+  candidate: 19.cpp
+  warning: none detected; manual comparison is still required
+
+Example 20 — Capstone: Hierarchical Animated Scene With Full Setup
+  candidate: 20.cpp
+  warning: none detected; manual comparison is still required

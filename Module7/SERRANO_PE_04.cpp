@@ -1,0 +1,54 @@
+#define GL_SILENCE_DEPRECATION
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glew.h>
+#include <GL/glut.h>
+#endif
+
+void drawQuad() {
+  glBegin(GL_QUADS);
+  glVertex2f(-0.18f, -0.18f);
+  glVertex2f( 0.18f, -0.18f);
+  glVertex2f( 0.18f,  0.18f);
+  glVertex2f(-0.18f,  0.18f);
+  glEnd();
+}
+
+void display() {
+  glClear(GL_COLOR_BUFFER_BIT);
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+
+  glPushMatrix();
+  glTranslatef(-0.6f, 0.0f, 0.0f);
+  glColor3f(0.2f, 0.7f, 0.9f);
+  drawQuad();
+  glPopMatrix();
+
+  glPushMatrix();
+  glRotatef(45.0f, 0.0f, 0.0f, 1.0f);
+  glColor3f(0.9f, 0.5f, 0.2f);
+  drawQuad();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0.6f, 0.0f, 0.0f);
+  glColor3f(0.4f, 0.9f, 0.4f);
+  drawQuad();
+  glPopMatrix();
+  glFlush();
+}
+
+int main(int argc, char **argv) {
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+  glutInitWindowSize(600, 600);
+  glutCreateWindow("PE_04 - Three Quads One Rotated");
+  glutDisplayFunc(display);
+#ifndef __APPLE__
+  if (glewInit() != GLEW_OK) return 1;
+#endif
+  glutMainLoop();
+  return 0;
+}
